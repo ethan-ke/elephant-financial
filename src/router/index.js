@@ -54,7 +54,6 @@ export const constantRoutes = [
       meta: { title: '仪表盘', icon: 'dashboard' }
     }]
   },
-
   {
     path: '/performance',
     component: Layout,
@@ -64,19 +63,18 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        name: 'Table',
+        name: 'PerformanceIndex',
         component: () => import('@/views/performance/index'),
         meta: { title: '绩效列表', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
+        path: 'create',
+        name: 'PerformanceCreate',
         component: () => import('@/views/performance/create'),
         meta: { title: '添加绩效', icon: 'form' }
       }
     ]
   },
-
   {
     path: '/staff',
     component: Layout,
@@ -95,41 +93,41 @@ export const constantRoutes = [
         name: 'Tree',
         component: () => import('@/views/staff/create'),
         meta: { title: '添加员工', icon: 'form' }
+      },
+      {
+        path: 'edit/:id',
+        name: 'StaffEdit',
+        component: () => import('@/views/staff/edit'),
+        meta: { title: '编辑员工' },
+        hidden: true
       }
     ]
   },
-
   {
     path: '/district',
     component: Layout,
     redirect: '/district/index',
-    name: 'Staff',
+    name: 'District',
     meta: { title: '地区管理', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'index',
-        name: 'Table',
+        name: 'DistrictIndex',
         component: () => import('@/views/district/index'),
         meta: { title: '地区列表', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
+        path: 'create',
+        name: 'DistrictCreate',
         component: () => import('@/views/district/create'),
         meta: { title: '添加地区', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
+      },
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        path: 'edit/:id',
+        name: 'DistrictEdit',
+        component: () => import('@/views/district/edit'),
+        meta: { title: '编辑地区' },
+        hidden: true
       }
     ]
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">Name: Elephant</div>
+    <div class="dashboard-text">Hello Elephant</div>
   </div>
 </template>
 
@@ -23,6 +23,8 @@ export default {
     margin: 30px;
   }
   &-text {
+    margin-top: 30vh;
+    text-align: center;
     font-size: 30px;
     line-height: 46px;
   }
