@@ -57,7 +57,7 @@ export default {
                 duration: 2000
               })
               this.loading = false
-              this.$router.push('/product/index')
+              this.$router.push('/district/index')
             })
           } else {
             createDistrict(this.postForm).then(response => {
@@ -69,7 +69,7 @@ export default {
                 duration: 2000
               })
               this.loading = false
-              this.$router.push('/product/index')
+              this.$router.push('/district/index')
             })
           }
         } else {

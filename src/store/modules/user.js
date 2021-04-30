@@ -6,7 +6,7 @@ const getDefaultState = () => {
   return {
     access_token: getAccessToken(),
     nickname: '',
-    avatar: ''
+    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
   }
 }
 
@@ -21,9 +21,6 @@ const mutations = {
   },
   SET_NICKNAME: (state, nickname) => {
     state.nickname = nickname
-  },
-  SET_AVATAR: (state, avatar) => {
-    state.avatar = avatar
   }
 }
 
@@ -34,7 +31,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       login({
         client_id: 1,
-        client_secret: 'TV3Dsm2fL4neCQ26DqmixSfKOuRHG74iTR4RNPHF',
+        client_secret: '4i6Nb0a73iJkD8wHgFX5Fq9Lp6RdO8ExFv1v2V1k',
         grant_type: 'password',
         username: username.trim(),
         password: password
@@ -55,7 +52,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo().then(response => {
         const { data } = response
-        console.log(data)
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
@@ -63,7 +59,6 @@ const actions = {
         const { nickname, avatar } = data
 
         commit('SET_NICKNAME', nickname)
-        commit('SET_AVATAR', avatar)
         resolve(data)
       }).catch(error => {
         reject(error)

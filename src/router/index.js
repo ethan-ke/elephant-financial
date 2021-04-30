@@ -69,9 +69,16 @@ export const constantRoutes = [
       },
       {
         path: 'create',
-        name: 'PerformanceCreate',
+        name: 'performance',
         component: () => import('@/views/performance/create'),
         meta: { title: '添加绩效', icon: 'form' }
+      },
+      {
+        path: 'edit/:id',
+        name: 'performanceEdit',
+        component: () => import('@/views/performance/edit'),
+        meta: { title: '编辑绩效' },
+        hidden: true
       }
     ]
   },
@@ -89,8 +96,8 @@ export const constantRoutes = [
         meta: { title: '员工列表', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
+        path: 'create',
+        name: 'StaffCreate',
         component: () => import('@/views/staff/create'),
         meta: { title: '添加员工', icon: 'form' }
       },

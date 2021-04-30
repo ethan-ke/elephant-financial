@@ -38,8 +38,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/staff'
-import { destroy } from '@/api/district'
+import { getList, destroy } from '@/api/staff'
 
 export default {
   filters: {

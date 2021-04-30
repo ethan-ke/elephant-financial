@@ -3,37 +3,40 @@
     <el-row>
       <el-col :span="6">
         <el-form ref="postForm" :model="postForm" :rules="rules" label-width="120px">
-          <el-form-item label="姓名" prop="name">
-            <el-select v-model="value" placeholder="请选择" class="width-100">
+          <el-form-item label="姓名" prop="staff_id">
+            <el-select v-model="postForm.staff_id" placeholder="请选择" class="width-100">
               <el-option
                 v-for="item in staff"
                 :key="item.id"
                 :label="item.name"
-                :value="item.name"
+                :value="item.id"
               />
             </el-select>
           </el-form-item>
-          <el-form-item label="单价" prop="name">
-            <el-input v-model="postForm.name"/>
+          <el-form-item label="单价" prop="price">
+            <el-input v-model="postForm.price" />
           </el-form-item>
-          <el-form-item label="人数" prop="name">
-            <el-input v-model="postForm.name"/>
+          <el-form-item label="人数" prop="number">
+            <el-input v-model="postForm.number" />
           </el-form-item>
-          <el-form-item label="提成率" prop="name">
-            <el-select v-model="value" placeholder="请选择" class="width-100">
+          <el-form-item label="提成率" prop="commission_rate">
+            <el-select v-model="postForm.commission_rate" placeholder="请选择" class="width-100">
               <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.value"
-                :value="item.value"
+                v-for="item in commission_rate"
+                :key="item"
+                :label="item"
+                :value="item"
               />
             </el-select>
           </el-form-item>
-          <el-form-item label="是否开班" prop="name">
+          <el-form-item label="是否开班" prop="status">
             <el-radio-group v-model="postForm.status">
-              <el-radio :label="3">开班</el-radio>
-              <el-radio :label="6">未开班</el-radio>
+              <el-radio :label="1">开班</el-radio>
+              <el-radio :label="2">未开班</el-radio>
             </el-radio-group>
+          </el-form-item>
+          <el-form-item label="备注">
+            <el-input v-model="postForm.remark" />
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">提交</el-button>
@@ -46,11 +49,11 @@
 </template>
 
 <script>
-import { createDistrict, getData, updateDistrict } from '@/api/district'
+import { createPerformance, getData, updatePerformance } from '@/api/performance'
 import { getList as staffList } from '@/api/staff'
 
 export default {
-  name: 'DistrictForm',
+  name: 'PerformanceForm',
   props: {
     isEdit: {
       type: Boolean,
@@ -60,16 +63,18 @@ export default {
   data() {
     return {
       postForm: {
-        name: ''
+        staff_id: null,
+        price: null,
+        number: null,
+        commission_rate: null,
+        remark: null,
+        status: 2
       },
       rules: {
-        name: [{ required: true, message: '地区名称不可为空!', trigger: 'blur' }]
+        price: [{ required: true, message: '单价不可为空!', trigger: 'blur' }],
+        number: [{ required: true, message: '人数不可为空!', trigger: 'blur' }]
       },
-      options: [{
-        value: '0.01'
-      }, {
-        value: '0.03'
-      }],
+      commission_rate: [0.01, 0.02, 0.03],
       value: '',
       staff: null
     }
@@ -88,7 +93,7 @@ export default {
       this.$refs.postForm.validate(valid => {
         if (valid) {
           if (this.isEdit) {
-            updateDistrict(this.postForm.id, this.postForm).then(response => {
+            updatePerformance(this.postForm.id, this.postForm).then(response => {
               this.loading = true
               this.$notify({
                 title: '成功',
@@ -97,10 +102,10 @@ export default {
                 duration: 2000
               })
               this.loading = false
-              this.$router.push('/product/index')
+              this.$router.push('/performance/index')
             })
           } else {
-            createDistrict(this.postForm).then(response => {
+            createPerformance(this.postForm).then(response => {
               this.loading = true
               this.$notify({
                 title: '成功',
@@ -109,7 +114,7 @@ export default {
                 duration: 2000
               })
               this.loading = false
-              this.$router.push('/product/index')
+              this.$router.push('/performance/index')
             })
           }
         } else {

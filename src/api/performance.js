@@ -2,34 +2,40 @@ import request from '@/utils/request'
 
 export function getList(params) {
   return request({
-    url: 'staff',
+    url: 'performance',
     method: 'get',
     params
   })
 }
 export function getData(id) {
   return request({
-    url: 'staff/' + id,
+    url: 'performance/' + id,
     method: 'get'
   })
 }
-export function createStaff(data) {
+export function createPerformance(data) {
   return request({
-    url: 'staff',
+    url: 'performance',
     method: 'post',
     data
   })
 }
-export function updateStaff(id, data) {
+export function updatePerformance(id, data) {
   return request({
-    url: 'staff/' + id,
+    url: 'performance/' + id,
     method: 'put',
     data
   })
 }
 export function destroy(id) {
   return request({
-    url: 'staff/' + id,
+    url: 'performance/' + id,
     method: 'delete'
+  })
+}
+export function exportPerformance() {
+  return request({
+    url: 'export',
+    method: 'get'
   })
 }

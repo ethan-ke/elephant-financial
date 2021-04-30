@@ -3,6 +3,16 @@
     <el-row>
       <el-col :span="6">
         <el-form ref="postForm" :model="postForm" :rules="rules" label-width="120px">
+          <el-form-item label="所属地区" prop="name">
+            <el-select v-model="postForm.district_id" placeholder="请选择" class="width-100">
+              <el-option
+                v-for="item in districts"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+              />
+            </el-select>
+          </el-form-item>
           <el-form-item label="员工名称" prop="name">
             <el-input v-model="postForm.name" />
           </el-form-item>
@@ -18,6 +28,7 @@
 
 <script>
 import { createStaff, getData, updateStaff } from '@/api/staff'
+import { getList as getDistrictList } from '@/api/district'
 
 export default {
   name: 'StaffForm',
@@ -30,10 +41,12 @@ export default {
   data() {
     return {
       postForm: {
-        name: ''
+        name: '',
+        district_id: null
       },
+      districts: null,
       rules: {
-        name: [{ required: true, message: '地区名称不可为空!', trigger: 'blur' }]
+        name: [{ required: true, message: '员工名称不可为空!', trigger: 'blur' }]
       }
     }
   },
@@ -42,6 +55,9 @@ export default {
       const id = this.$route.params && this.$route.params.id
       this.fetchData(id)
     }
+    getDistrictList().then(response => {
+      this.districts = response.data
+    })
   },
   methods: {
     onSubmit() {
