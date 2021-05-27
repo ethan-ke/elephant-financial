@@ -31,8 +31,8 @@
           </el-form-item>
           <el-form-item label="是否开班" prop="status">
             <el-radio-group v-model="postForm.status">
-              <el-radio :label="1">开班</el-radio>
-              <el-radio :label="2">未开班</el-radio>
+              <el-radio :label="2">开班</el-radio>
+              <el-radio :label="1">未开班</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="备注">
@@ -68,13 +68,13 @@ export default {
         number: null,
         commission_rate: null,
         remark: null,
-        status: 2
+        status: 1
       },
       rules: {
         price: [{ required: true, message: '单价不可为空!', trigger: 'blur' }],
         number: [{ required: true, message: '人数不可为空!', trigger: 'blur' }]
       },
-      commission_rate: [0.01, 0.02, 0.03],
+      commission_rate: [0.01, 0.015, 0.02, 0.03],
       value: '',
       staff: null
     }
